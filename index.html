@@ -35,7 +35,7 @@
     <section class="hero" aria-labelledby="hero-heading">
       <h1 id="hero-heading">Welcome <span id="userGreeting" aria-live="polite">@Guest</span> 👋</h1>
 
-      <p class="lead">Discover music and radio stations.</p>
+      <p class="lead">Discover movies, music, quotes, and tools.</p>
 
       <form id="searchForm" class="search-box" role="search">
         <label for="searchInput" class="sr-only">Search</label>
@@ -45,6 +45,7 @@
       </form>
     </section>
 
+    <!-- Movies & Music branch -->
     <section id="movies-music" aria-labelledby="movies-title">
       <div class="section-title">
         <h2 id="movies-title">1. Movies &amp; Music</h2>
@@ -52,6 +53,30 @@
 
       <p class="muted">Curated movies, soundtracks, and popular music.</p>
 
+      <!-- Movie branch: Today's suggestion -->
+      <div class="branch">
+        <h3 class="branch-title">Movie — Today's suggestion</h3>
+        <div class="suggestion-card" id="todayMovie">
+          <div class="cover">🎬</div>
+          <div class="meta">
+            <strong class="title">Inception (2010)</strong>
+            <p class="desc">Director: Christopher Nolan — Soundtrack by Hans Zimmer</p>
+            <button type="button" class="btn action" aria-label="More about movie" data-movie="Inception">More</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Music branch: Trending -->
+      <div class="branch">
+        <h3 class="branch-title">Music — Trending</h3>
+        <ul class="trending-list" id="trendingMusic">
+          <li><button type="button" class="trend-item" data-song="Blinding Lights" data-artist="The Weeknd">Blinding Lights — The Weeknd</button></li>
+          <li><button type="button" class="trend-item" data-song="Levitating" data-artist="Dua Lipa">Levitating — Dua Lipa</button></li>
+          <li><button type="button" class="trend-item" data-song="Space Song" data-artist="Beach House">Space Song — Beach House</button></li>
+        </ul>
+      </div>
+
+      <!-- Existing popular grid (kept) -->
       <ul class="music-grid" role="list">
         <li>
           <button class="music-card" type="button" data-song="Song One" data-artist="Artist One" aria-label="Play Song One by Artist One">
@@ -88,81 +113,96 @@
       </ul>
     </section>
 
+    <!-- Quotes branch -->
     <section id="quotes" aria-labelledby="quotes-title">
       <div class="section-title">
         <h2 id="quotes-title">2. Quotes &amp; Jokes &amp; Wisdom</h2>
       </div>
-      <div class="cards" style="padding:0 1rem;">
-        <article class="card">
-          <p class="lead">"Music expresses that which cannot be put into words." — Victor Hugo</p>
-        </article>
-        <article class="card">
-          <p class="lead">"Why did the musician get arrested? Because he got caught with too many sharp objects."</p>
-        </article>
+
+      <div class="branch">
+        <h3 class="branch-title">Randomly Quoting</h3>
+        <div class="quote-card" id="randomQuote">
+          <blockquote class="lead">"Music expresses that which cannot be put into words."</blockquote>
+          <cite class="muted">— Victor Hugo</cite>
+        </div>
+        <div class="quote-actions">
+          <button id="newQuote" type="button" class="btn">Another</button>
+        </div>
       </div>
     </section>
 
+    <!-- Tools branch -->
     <section id="tools" aria-labelledby="tools-title">
       <div class="section-title">
         <h2 id="tools-title">3. Tools</h2>
       </div>
-      <p class="muted">Handy utilities: tuner, BPM counter, playlist generator (coming soon).</p>
+
+      <div class="branch">
+        <h3 class="branch-title">Tools are on Telegram</h3>
+        <p class="muted">Most tools (tuner, BPM counter, playlist generator) are available through our Telegram bot.</p>
+        <p>Open in Telegram: <a href="https://t.me/your_echo_bot" target="_blank" rel="noopener">@your_echo_bot</a></p>
+        <p class="muted">For help and usage information, click <a href="#support">Admin Support</a> or contact the admin below.</p>
+      </div>
     </section>
 
-    <section id="admin-rights" aria-labelledby="admin-title">
-      <div class="section-title">
-        <h2 id="admin-title">4. Admins Rights &amp; Privacy Policy</h2>
-      </div>
-      <p class="muted">Policies and access control for administrators; privacy details.</p>
-    </section>
+    <!-- Admin rights & privacy in footer area -->
+    <footer id="site-footer" role="contentinfo">
+      <div class="footer-columns">
+        <div class="footer-col">
+          <h4>Admins Rights &amp; Privacy Policy</h4>
+          <p class="muted">View policies and access control for administrators. We respect user privacy and do not sell personal data.</p>
+          <p><a href="#admin-rights">Read full policy</a></p>
+        </div>
 
-    <section id="support" aria-labelledby="support-title">
-      <div class="section-title">
-        <h2 id="support-title">5. Admin Support &amp; Contact &amp; Suggestions</h2>
+        <div class="footer-col">
+          <h4>Contact Admin</h4>
+          <p class="muted">For admin support, privacy requests, or suggestions contact:</p>
+          <p><a href="mailto:admin@example.com">admin@example.com</a></p>
+        </div>
       </div>
-      <p class="muted">Contact form and suggestions for improving Echo.</p>
-    </section>
+
+      <div class="footer-note muted">© <span id="year"></span> Echo — All rights reserved.</div>
+    </footer>
+
   </main>
-
-  <div id="player" class="player" role="region" aria-live="polite" aria-label="Now playing">
-    <audio id="audio" preload="metadata"></audio>
-
-    <div class="player-info">
-      <div id="playerCover">🎵</div>
-      <div>
-        <strong id="playerTitle">Nothing playing</strong>
-        <small id="playerArtist">Echo</small>
-      </div>
-    </div>
-
-    <div class="player-controls">
-      <button id="prevBtn" type="button" aria-label="Previous">⏮</button>
-      <button id="playButton" type="button" aria-label="Play" data-playing="false">▶️</button>
-      <button id="nextBtn" type="button" aria-label="Next">⏭</button>
-    </div>
-  </div>
-
-  <nav class="bottom-nav" role="navigation" aria-label="Primary">
-    <button type="button" data-action="home" aria-label="Home">
-      🏠
-      <span>Home</span>
-    </button>
-
-    <button type="button" data-action="search" aria-label="Search">
-      🔎
-      <span>Search</span>
-    </button>
-
-    <button type="button" data-action="saved" aria-label="Saved">
-      ❤️
-      <span>Saved</span>
-    </button>
-  </nav>
 
   <noscript>
     <p>To play audio and use search you need JavaScript enabled. Basic navigation and content will still be visible.</p>
   </noscript>
 
   <script src="user.js" defer></script>
+
+  <script>
+    // Small inline script: random quotes, trending click handlers and footer year
+    (function(){
+      const quotes = [
+        {text:'Music expresses that which cannot be put into words.', author:'Victor Hugo'},
+        {text:'The only truth is music.', author:'Jack Kerouac'},
+        {text:'Without music, life would be a mistake.', author:'Friedrich Nietzsche'},
+        {text:'Why don\'t skeletons fight each other? They don\'t have the guts.', author:'Joke'},
+        {text:'Wisdom begins in wonder.', author:'Socrates'}
+      ];
+
+      function setRandomQuote(){
+        const q = quotes[Math.floor(Math.random()*quotes.length)];
+        const el = document.getElementById('randomQuote');
+        if(!el) return;
+        el.querySelector('blockquote').textContent = '"' + q.text + '"';
+        el.querySelector('cite').textContent = '— ' + q.author;
+      }
+      document.getElementById('newQuote')?.addEventListener('click', setRandomQuote);
+      // init
+      setRandomQuote();
+
+      // trending items click handler (placeholder behavior)
+      document.querySelectorAll('.trend-item').forEach(btn => btn.addEventListener('click', (e)=>{
+        const song = btn.dataset.song; const artist = btn.dataset.artist;
+        alert('Play trending: ' + song + ' — ' + artist + '\n(Preview playback not configured)');
+      }));
+
+      // footer year
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
 </body>
 </html>
