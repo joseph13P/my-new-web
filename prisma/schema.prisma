@@ -1,0 +1,46 @@
+// Prisma schema for Telegram auth
+// Run: npx prisma migrate dev --name init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String   @id @default(uuid())
+  email      String?  @unique
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  deletedAt  DateTime?
+  telegrams  TelegramAccount[]
+  refreshTokens RefreshToken[]
+}
+
+model TelegramAccount {
+  id            String   @id @default(uuid())
+  user          User?    @relation(fields: [userId], references: [id])
+  userId        String?
+  telegramId    BigInt   @unique
+  username      String?
+  firstName     String?
+  lastName      String?
+  photoUrl      String?
+  lastAuthAt    DateTime
+  consentAt     DateTime
+  rawPayload    Json?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model RefreshToken {
+  id          String   @id @default(uuid())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  tokenHash   String   // sha256 of the token
+  createdAt   DateTime @default(now())
+  revoked     Boolean  @default(false)
+}
