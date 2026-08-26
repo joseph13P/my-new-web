@@ -1,2 +1,2 @@
 # my-new-web
-Copy of the Web repository
+My Copy of the Web repository
