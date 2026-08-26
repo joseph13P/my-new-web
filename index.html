@@ -1,130 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Music Bot</title>
+  <title>Music Bot — Discover songs & radio</title>
+  <meta name="description" content="Music Bot — discover songs and radio stations, play and save your favorites." />
+  <link rel="icon" href="favicon.ico" />
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-  <header class="topbar">
-    <div class="logo">🎵 Music Bot</div>
-    <button class="menu-btn">☰</button>
+  <header class="topbar" role="banner">
+    <div class="logo" aria-hidden="true">🎵</div>
+    <div class="brand">Music Bot</div>
+    <button class="menu-btn" type="button" aria-label="Open menu">☰</button>
   </header>
 
-  <main>
+  <main class="container">
+    <section class="hero" aria-labelledby="hero-heading">
+      <h1 id="hero-heading">Welcome back 👋</h1>
+      <p class="lead">Discover music and radio stations.</p>
 
-    <section class="hero">
-      <h1>Welcome back 👋</h1>
-      <p>Discover music and radio stations.</p>
-
-      <div class="search-box">
-        <span>🔎</span>
-        <input
-          id="searchInput"
-          type="text"
-          placeholder="Search music..."
-        >
-        <button onclick="searchMusic()">Search</button>
-      </div>
+      <form id="searchForm" class="search-box" role="search">
+        <label for="searchInput" class="sr-only">Search music</label>
+        <span aria-hidden="true">🔎</span>
+        <input id="searchInput" name="q" type="search" placeholder="Search music..." />
+        <button id="searchButton" type="submit">Search</button>
+      </form>
     </section>
 
-
-    <section>
+    <section aria-labelledby="popular-title">
       <div class="section-title">
-        <h2>🔥 Popular</h2>
+        <h2 id="popular-title">🔥 Popular</h2>
       </div>
 
-      <div class="music-grid">
+      <ul class="music-grid" role="list">
+        <li>
+          <button class="music-card" type="button" data-song="Song One" data-artist="Artist One" aria-label="Play Song One by Artist One">
+            <div class="cover" aria-hidden="true">🎵</div>
+            <div class="meta">
+              <h3>Song One</h3>
+              <p>Artist One</p>
+            </div>
+            <span class="play-indicator" aria-hidden="true">▶</span>
+          </button>
+        </li>
 
-        <div class="music-card" onclick="playSong('Song One')">
-          <div class="cover">🎵</div>
-          <h3>Song One</h3>
-          <p>Artist One</p>
-          <button>▶</button>
-        </div>
+        <li>
+          <button class="music-card" type="button" data-song="Song Two" data-artist="Artist Two" aria-label="Play Song Two by Artist Two">
+            <div class="cover" aria-hidden="true">🎧</div>
+            <div class="meta">
+              <h3>Song Two</h3>
+              <p>Artist Two</p>
+            </div>
+            <span class="play-indicator" aria-hidden="true">▶</span>
+          </button>
+        </li>
 
-        <div class="music-card" onclick="playSong('Song Two')">
-          <div class="cover">🎧</div>
-          <h3>Song Two</h3>
-          <p>Artist Two</p>
-          <button>▶</button>
-        </div>
-
-        <div class="music-card" onclick="playSong('Song Three')">
-          <div class="cover">🎶</div>
-          <h3>Song Three</h3>
-          <p>Artist Three</p>
-          <button>▶</button>
-        </div>
-
-      </div>
+        <li>
+          <button class="music-card" type="button" data-song="Song Three" data-artist="Artist Three" aria-label="Play Song Three by Artist Three">
+            <div class="cover" aria-hidden="true">🎶</div>
+            <div class="meta">
+              <h3>Song Three</h3>
+              <p>Artist Three</p>
+            </div>
+            <span class="play-indicator" aria-hidden="true">▶</span>
+          </button>
+        </li>
+      </ul>
     </section>
 
-
-    <section>
+    <section aria-labelledby="radio-title">
       <div class="section-title">
-        <h2>📻 Radio Stations</h2>
+        <h2 id="radio-title">📻 Radio Stations</h2>
       </div>
 
-      <div class="radio-list">
-
-        <div class="radio-card">
-          <div class="station-icon">🔴</div>
-
+      <ul class="radio-list" role="list">
+        <li class="radio-card">
+          <div class="station-icon" aria-hidden="true">🔴</div>
           <div class="station-info">
             <h3>Chill Radio</h3>
             <p>Relaxing music</p>
           </div>
+          <button class="radio-play" type="button" data-station="Chill Radio">▶</button>
+        </li>
 
-          <button onclick="playRadio('Chill Radio')">
-            ▶
-          </button>
-        </div>
-
-
-        <div class="radio-card">
-          <div class="station-icon">🟢</div>
-
+        <li class="radio-card">
+          <div class="station-icon" aria-hidden="true">🟢</div>
           <div class="station-info">
             <h3>Pop Radio</h3>
             <p>Popular hits</p>
           </div>
+          <button class="radio-play" type="button" data-station="Pop Radio">▶</button>
+        </li>
 
-          <button onclick="playRadio('Pop Radio')">
-            ▶
-          </button>
-        </div>
-
-
-        <div class="radio-card">
-          <div class="station-icon">🔵</div>
-
+        <li class="radio-card">
+          <div class="station-icon" aria-hidden="true">🔵</div>
           <div class="station-info">
             <h3>Lo-Fi Radio</h3>
-            <p>Study & chill</p>
+            <p>Study &amp; chill</p>
           </div>
-
-          <button onclick="playRadio('Lo-Fi Radio')">
-            ▶
-          </button>
-        </div>
-
-      </div>
+          <button class="radio-play" type="button" data-station="Lo-Fi Radio">▶</button>
+        </li>
+      </ul>
     </section>
-
   </main>
 
-
-  <div id="player" class="player">
+  <div id="player" class="player" role="region" aria-live="polite" aria-label="Now playing">
+    <audio id="audio" preload="metadata"></audio>
 
     <div class="player-info">
       <div id="playerCover">🎵</div>
-
       <div>
         <strong id="playerTitle">Nothing playing</strong>
         <small id="playerArtist">Music Bot</small>
@@ -132,35 +121,33 @@
     </div>
 
     <div class="player-controls">
-      <button onclick="previousSong()">⏮</button>
-      <button id="playButton" onclick="togglePlay()">▶️</button>
-      <button onclick="nextSong()">⏭</button>
+      <button id="prevBtn" type="button" aria-label="Previous">⏮</button>
+      <button id="playButton" type="button" aria-label="Play" data-playing="false">▶️</button>
+      <button id="nextBtn" type="button" aria-label="Next">⏭</button>
     </div>
-
   </div>
 
-
-  <nav class="bottom-nav">
-
-    <button onclick="showHome()">
+  <nav class="bottom-nav" role="navigation" aria-label="Primary">
+    <button type="button" data-action="home" aria-label="Home">
       🏠
       <span>Home</span>
     </button>
 
-    <button onclick="focusSearch()">
+    <button type="button" data-action="search" aria-label="Search">
       🔎
       <span>Search</span>
     </button>
 
-    <button onclick="showSaved()">
+    <button type="button" data-action="saved" aria-label="Saved">
       ❤️
       <span>Saved</span>
     </button>
-
   </nav>
 
+  <noscript>
+    <p>To play audio and use search you need JavaScript enabled. Basic navigation and content will still be visible.</p>
+  </noscript>
 
-  <script src="app.js"></script>
-
+  <script src="app.js" defer></script>
 </body>
 </html>
