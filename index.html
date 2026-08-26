@@ -3,168 +3,1816 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="echo-bot" content="j_oy_bot" />
+
+  <meta name="theme-color" content="#09090d">
+
   <title>ECHO — Home</title>
+
   <link rel="icon" href="favicon.ico" />
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Telegram Web App -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
+
 <body>
-  <header class="topbar" role="banner">
-    <div class="logo" aria-hidden="true">★</div>
-    <div class="brand" aria-label="Application name">ECHO</div>
-  </header>
 
-  <main class="container">
-    <section class="hero" aria-labelledby="hero-heading">
-      <h1 id="hero-heading">Welcome <span id="userGreeting" aria-live="polite">@Guest</span> 👋</h1>
-      <p class="lead">Discover what you want in Telegram</p>
-    </section>
+<header class="topbar">
 
-    <!-- Movies & Music branch -->
-    <section id="movies-music" aria-labelledby="movies-title">
-      <div class="section-title">
-        <h2 id="movies-title">1. Movies &amp; Music</h2>
+  <div class="brand">
+    <span class="logo">★</span>
+    <strong>ECHO</strong>
+  </div>
+
+  <button
+    class="icon-btn"
+    type="button"
+    onclick="showToast('Menu coming soon')"
+    aria-label="Menu">
+    ☰
+  </button>
+
+</header>
+
+
+<main class="container">
+
+  <!-- =========================
+       WELCOME
+  ========================== -->
+
+  <section class="hero">
+
+    <p class="eyebrow">ECHO</p>
+
+    <h1>
+      Welcome
+      <span id="userGreeting">@Guest</span>
+      👋
+    </h1>
+
+    <p>
+      Discover music, radio, movies and useful tools.
+    </p>
+
+    <div class="search">
+
+      <span>🔎</span>
+
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="Search ECHO..."
+        autocomplete="off"
+      />
+
+      <button
+        type="button"
+        onclick="searchECHO()">
+        Search
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       MUSIC
+  ========================== -->
+
+  <section id="music">
+
+    <div class="section-head">
+
+      <div>
+        <span class="eyebrow">01</span>
+        <h2>🎵 Music</h2>
       </div>
 
-      <p class="muted">Curated movies, soundtracks, and popular music.</p>
+      <button
+        class="text-btn"
+        type="button"
+        onclick="scrollToId('music-api')">
+        View all
+      </button>
 
-      <!-- Movie branch: Today's suggestion -->
-      <div class="branch">
-        <h3 class="branch-title">Movie — Today's suggestion</h3>
-        <div class="suggestion-card" id="todayMovie">
-          <div class="cover">🎬</div>
-          <div class="meta">
-            <strong class="title">Inception (2010)</strong>
-            <p class="desc">Director: Christopher Nolan — Soundtrack by Hans Zimmer</p>
-            <button type="button" class="btn action" aria-label="More about movie" data-movie="Inception">More</button>
-          </div>
-        </div>
+    </div>
+
+
+    <div class="cards">
+
+      <button
+        class="feature-card"
+        type="button"
+        onclick="scrollToId('music-api')">
+
+        <span>🎵</span>
+
+        <b>Trending</b>
+
+        <small>
+          Discover music
+        </small>
+
+      </button>
+
+
+      <button
+        class="feature-card"
+        type="button"
+        onclick="scrollToId('music-api')">
+
+        <span>🎧</span>
+
+        <b>Popular</b>
+
+        <small>
+          Popular tracks
+        </small>
+
+      </button>
+
+    </div>
+
+
+    <!-- Example songs -->
+
+    <div class="list">
+
+      <button
+        class="list-row"
+        type="button"
+        onclick="playDemo(
+          'Blinding Lights',
+          'The Weeknd'
+        )">
+
+        <span>🔴</span>
+
+        <span>
+          <b>Blinding Lights</b>
+          <small>The Weeknd</small>
+        </span>
+
+        <i>▶</i>
+
+      </button>
+
+
+      <button
+        class="list-row"
+        type="button"
+        onclick="playDemo(
+          'Levitating',
+          'Dua Lipa'
+        )">
+
+        <span>🟣</span>
+
+        <span>
+          <b>Levitating</b>
+          <small>Dua Lipa</small>
+        </span>
+
+        <i>▶</i>
+
+      </button>
+
+
+      <button
+        class="list-row"
+        type="button"
+        onclick="playDemo(
+          'Space Song',
+          'Beach House'
+        )">
+
+        <span>🔵</span>
+
+        <span>
+          <b>Space Song</b>
+          <small>Beach House</small>
+        </span>
+
+        <i>▶</i>
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       JAMENDO MUSIC API
+  ========================== -->
+
+  <section id="music-api">
+
+    <div class="section-head">
+
+      <div>
+        <span class="eyebrow">01A</span>
+
+        <h2>
+          🎵 Free Music
+        </h2>
       </div>
 
-      <!-- Music branch: Trending -->
-      <div class="branch">
-        <h3 class="branch-title">Music — Trending</h3>
-        <ul class="trending-list" id="trendingMusic">
-          <li><button type="button" class="trend-item" data-song="Blinding Lights" data-artist="The Weeknd">Blinding Lights — The Weeknd</button></li>
-          <li><button type="button" class="trend-item" data-song="Levitating" data-artist="Dua Lipa">Levitating — Dua Lipa</button></li>
-          <li><button type="button" class="trend-item" data-song="Space Song" data-artist="Beach House">Space Song — Beach House</button></li>
-        </ul>
+    </div>
+
+
+    <div class="download-card">
+
+      <h3>
+        Search free music
+      </h3>
+
+      <p>
+        Search the Jamendo music catalog.
+      </p>
+
+
+      <div class="url-box">
+
+        <span>🔎</span>
+
+        <input
+          id="musicSearchInput"
+          type="text"
+          placeholder="Search artist or song..."
+          autocomplete="off"
+        />
+
+        <button
+          type="button"
+          onclick="searchMusic()">
+          Search
+        </button>
+
       </div>
 
-      <!-- Existing popular grid (kept) -->
-      <ul class="music-grid" role="list">
-        <li>
-          <button class="music-card" type="button" data-song="Song One" data-artist="Artist One" aria-label="Play Song One by Artist One">
-            <div class="cover" aria-hidden="true">🎵</div>
-            <div class="meta">
-              <h3>Song One</h3>
-            </div>
-          </button>
-        </li>
-      </ul>
-    </section>
+    </div>
 
-    <!-- Quotes branch -->
-    <section id="quotes" aria-labelledby="quotes-title">
-      <div class="section-title">
-        <h2 id="quotes-title">2. Quotes &amp; Jokes &amp; Wisdom</h2>
+
+    <!-- API results -->
+
+    <div
+      id="musicResults"
+      class="list">
+
+      <div class="empty">
+        Search for music to see results.
       </div>
 
-      <div class="branch">
-        <h3 class="branch-title">Randomly Quoting</h3>
-        <div class="quote-card" id="randomQuote">
-          <blockquote class="lead">"Music expresses that which cannot be put into words."</blockquote>
-          <cite class="muted">— Victor Hugo</cite>
-        </div>
-        <div class="quote-actions">
-          <button id="newQuote" type="button" class="btn">Another</button>
-        </div>
-      </div>
-    </section>
+    </div>
 
-    <!-- Tools branch -->
-    <section id="tools" aria-labelledby="tools-title">
-      <div class="section-title">
-        <h2 id="tools-title">3. Tools</h2>
-      </div>
 
-      <div class="branch">
-        <h3 class="branch-title">Tools are on Telegram</h3>
-        <p class="muted">Most tools (tuner, BPM counter, playlist generator) are available through our Telegram bot.</p>
-        <p>Open in Telegram: <a href="https://t.me/j_oy_bot" target="_blank" rel="noopener">@j_oy_bot</a></p>
-        <p class="muted">For help and usage information, click <a href="#support">Admin Support</a> or contact the admin below.</p>
-      </div>
-    </section>
+    <p class="api-note">
 
-    <!-- Admin rights & privacy in footer area -->
-    <footer id="site-footer" role="contentinfo">
-      <div class="footer-columns">
-        <div class="footer-col">
-          <h4>Admins Rights &amp; Privacy Policy</h4>
-          <p class="muted">View policies and access control for administrators. We respect user privacy and do not sell personal data.</p>
-          <p><a href="#admin-rights">Read full policy</a></p>
-        </div>
+      Music catalog powered by Jamendo.
 
-        <div class="footer-col">
-          <h4>Contact Admin</h4>
-          <p class="muted">For admin support, privacy requests, or suggestions contact:</p>
-          <p><a href="mailto:admin@example.com">admin@example.com</a></p>
-        </div>
+      <br />
+
+      Add your own Jamendo client ID
+      before production.
+
+    </p>
+
+  </section>
+
+
+  <!-- =========================
+       RADIO
+  ========================== -->
+
+  <section id="radio-api">
+
+    <div class="section-head">
+
+      <div>
+
+        <span class="eyebrow">
+          02
+        </span>
+
+        <h2>
+          📻 Live Radio
+        </h2>
+
       </div>
 
-      <div class="footer-note muted">© <span id="year"></span> Echo — All rights reserved.</div>
-    </footer>
 
-  </main>
+      <button
+        class="text-btn"
+        type="button"
+        onclick="loadRadio()">
 
-  <noscript>
-    <p>To play audio and use search you need JavaScript enabled. Basic navigation and content will still be visible.</p>
-  </noscript>
+        Refresh
 
-  <script src="user.js" defer></script>
+      </button>
 
-  <script>
-    // Small inline script: set logo and app name as constants, random quotes, trending click handlers and footer year
-    (function(){
-      // App constants (uppercase)
-      const APP_LOGO = '★';
-      const APP_NAME = 'ECHO';
+    </div>
 
-      // Apply header/logo text (in case server-rendered values differ)
-      const logoEl = document.querySelector('.logo');
-      const brandEl = document.querySelector('.brand');
-      if(logoEl) logoEl.textContent = APP_LOGO;
-      if(brandEl) brandEl.textContent = APP_NAME;
 
-      const quotes = [
-        {text:'Music expresses that which cannot be put into words.', author:'Victor Hugo'},
-        {text:'The only truth is music.', author:'Jack Kerouac'},
-        {text:'Without music, life would be a mistake.', author:'Friedrich Nietzsche'},
-        {text:'Why don\'t skeletons fight each other? They don\'t have the guts.', author:'Joke'},
-        {text:'Wisdom begins in wonder.', author:'Socrates'}
-      ];
+    <!-- Radio filters -->
 
-      function setRandomQuote(){
-        const q = quotes[Math.floor(Math.random()*quotes.length)];
-        const el = document.getElementById('randomQuote');
-        if(!el) return;
-        el.querySelector('blockquote').textContent = '"' + q.text + '"';
-        el.querySelector('cite').textContent = '— ' + q.author;
+    <div class="radio-filters">
+
+      <button
+        class="filter active"
+        type="button"
+        onclick="loadRadio('topclick')">
+
+        Popular
+
+      </button>
+
+
+      <button
+        class="filter"
+        type="button"
+        onclick="loadRadio('country:Myanmar')">
+
+        Myanmar
+
+      </button>
+
+
+      <button
+        class="filter"
+        type="button"
+        onclick="loadRadio('tag:pop')">
+
+        Pop
+
+      </button>
+
+
+      <button
+        class="filter"
+        type="button"
+        onclick="loadRadio('tag:jazz')">
+
+        Jazz
+
+      </button>
+
+    </div>
+
+
+    <div
+      id="radioResults"
+      class="list">
+
+      <div class="empty">
+
+        Loading radio stations…
+
+      </div>
+
+    </div>
+
+
+    <p class="api-note">
+
+      Radio stations powered by
+      Radio Browser.
+
+    </p>
+
+  </section>
+
+
+  <!-- =========================
+       MOVIES
+  ========================== -->
+
+  <section id="movies">
+
+    <div class="section-head">
+
+      <div>
+
+        <span class="eyebrow">
+          03
+        </span>
+
+        <h2>
+          🎬 Movies
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <article class="movie-card">
+
+      <div class="movie-cover">
+        🎬
+      </div>
+
+
+      <div>
+
+        <span class="tag">
+          TODAY'S SUGGESTION
+        </span>
+
+        <h3>
+          Inception
+        </h3>
+
+        <p>
+          2010 · Christopher Nolan
+        </p>
+
+
+        <button
+          class="btn"
+          type="button"
+          onclick="showToast(
+            'Movie details coming soon'
+          )">
+
+          More about movie
+
+        </button>
+
+      </div>
+
+    </article>
+
+  </section>
+
+
+  <!-- =========================
+       DOWNLOAD
+  ========================== -->
+
+  <section id="download">
+
+    <div class="section-head">
+
+      <div>
+
+        <span class="eyebrow">
+          04
+        </span>
+
+        <h2>
+          📥 Download
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="download-card">
+
+      <h3>
+        Save permitted media
+      </h3>
+
+      <p>
+        Paste a direct media URL for
+        content you own or have permission
+        to download.
+      </p>
+
+
+      <div class="url-box">
+
+        <span>🔗</span>
+
+        <input
+          id="mediaUrl"
+          type="url"
+          placeholder="https://example.com/file.mp3"
+        />
+
+
+        <button
+          type="button"
+          onclick="downloadMedia()">
+
+          Download
+
+        </button>
+
+      </div>
+
+
+      <small>
+
+        Download backend will be connected
+        separately.
+
+      </small>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       QUOTES
+  ========================== -->
+
+  <section id="quotes">
+
+    <div class="section-head">
+
+      <div>
+
+        <span class="eyebrow">
+          05
+        </span>
+
+        <h2>
+          💡 Quotes & Wisdom
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="quote-card">
+
+      <blockquote id="quoteText">
+
+        “Music expresses that which
+        cannot be put into words.”
+
+      </blockquote>
+
+
+      <cite id="quoteAuthor">
+        — Victor Hugo
+      </cite>
+
+
+      <button
+        class="btn"
+        type="button"
+        onclick="newQuote()">
+
+        Another
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       TOOLS
+  ========================== -->
+
+  <section id="tools">
+
+    <div class="section-head">
+
+      <div>
+
+        <span class="eyebrow">
+          06
+        </span>
+
+        <h2>
+          🛠 Tools
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="cards">
+
+      <button
+        class="tool-card"
+        type="button"
+        onclick="showToast(
+          'Tuner coming soon'
+        )">
+
+        🎚️
+
+        <b>
+          Tuner
+        </b>
+
+        <small>
+          Coming soon
+        </small>
+
+      </button>
+
+
+      <button
+        class="tool-card"
+        type="button"
+        onclick="showToast(
+          'BPM counter coming soon'
+        )">
+
+        🥁
+
+        <b>
+          BPM Counter
+        </b>
+
+        <small>
+          Coming soon
+        </small>
+
+      </button>
+
+
+      <button
+        class="tool-card"
+        type="button"
+        onclick="showToast(
+          'Playlist generator coming soon'
+        )">
+
+        📋
+
+        <b>
+          Playlist
+        </b>
+
+        <small>
+          Coming soon
+        </small>
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div>
+
+      <b>
+        ⚙️ Admin & Privacy
+      </b>
+
+      <p>
+        Privacy, support and administration.
+      </p>
+
+    </div>
+
+
+    <a
+      href="https://t.me/your_echo_bot"
+      target="_blank"
+      rel="noopener">
+
+      Open ECHO Bot →
+
+    </a>
+
+
+    <p class="copyright">
+
+      ©
+      <span id="year"></span>
+      ECHO
+
+    </p>
+
+  </footer>
+
+</main>
+
+
+<!-- =========================
+     MINI PLAYER
+========================== -->
+
+<div
+  class="player"
+  id="player">
+
+
+  <div class="player-track">
+
+    <span id="playerIcon">
+      🎵
+    </span>
+
+
+    <div>
+
+      <b id="playerTitle">
+        Nothing playing
+      </b>
+
+      <small id="playerArtist">
+        ECHO
+      </small>
+
+    </div>
+
+  </div>
+
+
+  <div class="controls">
+
+    <button
+      type="button"
+      onclick="showToast('Previous')">
+
+      ⏮
+
+    </button>
+
+
+    <button
+      class="play"
+      id="playBtn"
+      type="button"
+      onclick="togglePlay()">
+
+      ▶
+
+    </button>
+
+
+    <button
+      type="button"
+      onclick="showToast('Next')">
+
+      ⏭
+
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     BOTTOM NAV
+========================== -->
+
+<nav class="bottom-nav">
+
+  <button
+    type="button"
+    onclick="goHome()">
+
+    🏠
+    <small>Home</small>
+
+  </button>
+
+
+  <button
+    type="button"
+    onclick="focusSearch()">
+
+    🔎
+    <small>Search</small>
+
+  </button>
+
+
+  <button
+    type="button"
+    onclick="scrollToId('music-api')">
+
+    🎵
+    <small>Music</small>
+
+  </button>
+
+
+  <button
+    type="button"
+    onclick="scrollToId('radio-api')">
+
+    📻
+    <small>Radio</small>
+
+  </button>
+
+</nav>
+
+
+<div
+  id="toast"
+  class="toast">
+</div>
+
+
+<script>
+
+/* ==========================================
+   CONFIGURATION
+========================================== */
+
+/*
+ * Get your own Jamendo client ID:
+ * https://developer.jamendo.com/
+ *
+ * Do NOT use a secret key in frontend code.
+ */
+
+const JAMENDO_CLIENT_ID =
+  "YOUR_JAMENDO_CLIENT_ID";
+
+
+/*
+ * Radio Browser is public.
+ */
+
+const RADIO_API =
+  "https://de1.api.radio-browser.info/json/stations/search";
+
+
+/* ==========================================
+   TELEGRAM USER
+========================================== */
+
+function initTelegramUser() {
+
+  const tg =
+    window.Telegram &&
+    window.Telegram.WebApp;
+
+  if (!tg) {
+
+    return;
+
+  }
+
+
+  tg.ready();
+
+  tg.expand();
+
+
+  const telegramUser =
+    tg.initDataUnsafe &&
+    tg.initDataUnsafe.user;
+
+
+  if (!telegramUser) {
+
+    return;
+
+  }
+
+
+  /*
+   * First name is preferred.
+   *
+   * Example:
+   *
+   * Welcome Ivan 👋
+   */
+
+  const firstName =
+    telegramUser.first_name;
+
+
+  const username =
+    telegramUser.username;
+
+
+  const greeting =
+    document.getElementById(
+      "userGreeting"
+    );
+
+
+  if (!greeting) {
+
+    return;
+
+  }
+
+
+  if (firstName) {
+
+    greeting.textContent =
+      firstName;
+
+  }
+
+  else if (username) {
+
+    greeting.textContent =
+      "@" + username;
+
+  }
+
+  else {
+
+    greeting.textContent =
+      "Guest";
+
+  }
+
+}
+
+
+/* ==========================================
+   TOAST
+========================================== */
+
+let toastTimer;
+
+
+function showToast(message) {
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+
+  toast.textContent =
+    message;
+
+
+  toast.classList.add(
+    "show"
+  );
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  toastTimer =
+    setTimeout(
+      () => {
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      2200
+    );
+
+}
+
+
+/* ==========================================
+   MUSIC PLAYER
+========================================== */
+
+let currentAudio =
+  null;
+
+
+let currentTitle =
+  "";
+
+
+let playing =
+  false;
+
+
+function stopAudio() {
+
+  if (!currentAudio) {
+
+    return;
+
+  }
+
+
+  currentAudio.pause();
+
+  currentAudio.src = "";
+
+  currentAudio = null;
+
+}
+
+
+function playStream(
+  title,
+  artist,
+  streamUrl
+) {
+
+  if (!streamUrl) {
+
+    showToast(
+      "No playable stream available"
+    );
+
+    return;
+
+  }
+
+
+  stopAudio();
+
+
+  currentAudio =
+    new Audio(streamUrl);
+
+
+  currentTitle =
+    title;
+
+
+  document.getElementById(
+    "playerTitle"
+  ).textContent =
+    title;
+
+
+  document.getElementById(
+    "playerArtist"
+  ).textContent =
+    artist || "Radio";
+
+
+  currentAudio.play()
+    .then(() => {
+
+      playing = true;
+
+      document.getElementById(
+        "playBtn"
+      ).textContent =
+        "⏸";
+
+    })
+    .catch(() => {
+
+      showToast(
+        "Playback was blocked or unavailable"
+      );
+
+    });
+
+}
+
+
+function playDemo(
+  title,
+  artist
+) {
+
+  currentTitle =
+    title;
+
+
+  playing =
+    true;
+
+
+  document.getElementById(
+    "playerTitle"
+  ).textContent =
+    title;
+
+
+  document.getElementById(
+    "playerArtist"
+  ).textContent =
+    artist;
+
+
+  document.getElementById(
+    "playBtn"
+  ).textContent =
+    "⏸";
+
+
+  showToast(
+    "Demo: " + title
+  );
+
+}
+
+
+function togglePlay() {
+
+  if (!currentAudio) {
+
+    if (!currentTitle) {
+
+      showToast(
+        "Choose music or radio first"
+      );
+
+      return;
+
+    }
+
+
+    showToast(
+      "This demo track has no audio URL"
+    );
+
+    return;
+
+  }
+
+
+  if (playing) {
+
+    currentAudio.pause();
+
+    playing = false;
+
+  }
+
+  else {
+
+    currentAudio.play();
+
+    playing = true;
+
+  }
+
+
+  document.getElementById(
+    "playBtn"
+  ).textContent =
+    playing ? "⏸" : "▶";
+
+}
+
+
+/* ==========================================
+   JAMENDO MUSIC SEARCH
+========================================== */
+
+async function searchMusic() {
+
+  const input =
+    document.getElementById(
+      "musicSearchInput"
+    );
+
+
+  const query =
+    input.value.trim();
+
+
+  const results =
+    document.getElementById(
+      "musicResults"
+    );
+
+
+  if (!query) {
+
+    showToast(
+      "Enter a song or artist"
+    );
+
+    return;
+
+  }
+
+
+  if (
+    JAMENDO_CLIENT_ID ===
+    "YOUR_JAMENDO_CLIENT_ID"
+  ) {
+
+    results.innerHTML =
+      '<div class="empty">' +
+      'Add your Jamendo client ID first.' +
+      '</div>';
+
+    showToast(
+      "Jamendo client ID required"
+    );
+
+    return;
+
+  }
+
+
+  results.innerHTML =
+    '<div class="empty">Searching music…</div>';
+
+
+  try {
+
+    const url =
+      "https://api.jamendo.com/v3.0/tracks/" +
+      "?client_id=" +
+      encodeURIComponent(
+        JAMENDO_CLIENT_ID
+      ) +
+      "&format=json" +
+      "&limit=10" +
+      "&namesearch=" +
+      encodeURIComponent(query);
+
+
+    const response =
+      await fetch(url);
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        "Music API request failed"
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    const tracks =
+      data.results || [];
+
+
+    if (!tracks.length) {
+
+      results.innerHTML =
+        '<div class="empty">' +
+        'No music found.' +
+        '</div>';
+
+      return;
+
+    }
+
+
+    results.innerHTML =
+      "";
+
+
+    tracks.forEach(
+      track => {
+
+        const row =
+          document.createElement(
+            "button"
+          );
+
+
+        row.className =
+          "list-row";
+
+
+        row.type =
+          "button";
+
+
+        row.innerHTML =
+
+          '<span>🎵</span>' +
+
+          '<span>' +
+
+          '<b>' +
+          escapeHTML(
+            track.name ||
+            "Unknown"
+          ) +
+          '</b>' +
+
+          '<small>' +
+          escapeHTML(
+            track.artist_name ||
+            "Unknown artist"
+          ) +
+          '</small>' +
+
+          '</span>' +
+
+          '<i>▶</i>';
+
+
+        row.onclick =
+          () => {
+
+            /*
+             * Jamendo provides audio
+             * URLs in its track data.
+             *
+             * Use the permitted stream/
+             * download field returned
+             * by your selected API plan.
+             */
+
+            const audioUrl =
+              track.audio;
+
+
+            if (audioUrl) {
+
+              playStream(
+                track.name,
+                track.artist_name,
+                audioUrl
+              );
+
+            }
+
+            else {
+
+              showToast(
+                "No playable audio URL"
+              );
+
+            }
+
+          };
+
+
+        results.appendChild(
+          row
+        );
+
       }
-      document.getElementById('newQuote')?.addEventListener('click', setRandomQuote);
-      // init
-      setRandomQuote();
+    );
 
-      // trending items click handler (placeholder behavior)
-      document.querySelectorAll('.trend-item').forEach(btn => btn.addEventListener('click', (e)=>{
-        const song = btn.dataset.song; const artist = btn.dataset.artist;
-        // replace alert with console message for better UX; keep easily discoverable placeholder
-        console.log('Play trending: ' + song + ' — ' + artist + ' (Preview playback not configured)');
-      }));
+  }
 
-      // footer year
-      document.getElementById('year').textContent = new Date().getFullYear();
-    })();
-  </script>
+  catch (error) {
+
+    console.error(
+      error
+    );
+
+
+    results.innerHTML =
+      '<div class="empty">' +
+      'Could not load music.' +
+      '</div>';
+
+    showToast(
+      "Music API error"
+    );
+
+  }
+
+}
+
+
+/* ==========================================
+   RADIO BROWSER
+========================================== */
+
+async function loadRadio(
+  filter = "topclick"
+) {
+
+  const results =
+    document.getElementById(
+      "radioResults"
+    );
+
+
+  results.innerHTML =
+    '<div class="empty">' +
+    'Loading radio stations…' +
+    '</div>';
+
+
+  try {
+
+    let params =
+      "?hidebroken=true" +
+      "&limit=12" +
+      "&order=clickcount" +
+      "&reverse=true";
+
+
+    if (
+      filter.startsWith(
+        "country:"
+      )
+    ) {
+
+      params +=
+        "&country=" +
+        encodeURIComponent(
+          filter.substring(
+            8
+          )
+        );
+
+    }
+
+
+    else if (
+      filter.startsWith(
+        "tag:"
+      )
+    ) {
+
+      params =
+        "?hidebroken=true" +
+        "&limit=12" +
+        "&order=clickcount" +
+        "&reverse=true" +
+        "&tag=" +
+        encodeURIComponent(
+          filter.substring(4)
+        );
+
+    }
+
+
+    const response =
+      await fetch(
+        RADIO_API + params
+      );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        "Radio API request failed"
+      );
+
+    }
+
+
+    const stations =
+      await response.json();
+
+
+    results.innerHTML =
+      "";
+
+
+    if (
+      !stations.length
+    ) {
+
+      results.innerHTML =
+        '<div class="empty">' +
+        'No stations found.' +
+        '</div>';
+
+      return;
+
+    }
+
+
+    stations.forEach(
+      station => {
+
+        const row =
+          document.createElement(
+            "button"
+          );
+
+
+        row.className =
+          "list-row";
+
+
+        row.type =
+          "button";
+
+
+        row.innerHTML =
+
+          '<span>📻</span>' +
+
+          '<span>' +
+
+          '<b>' +
+          escapeHTML(
+            station.name ||
+            "Unknown station"
+          ) +
+          '</b>' +
+
+          '<small>' +
+          escapeHTML(
+            station.country ||
+            "Internet radio"
+          ) +
+
+          " · " +
+
+          escapeHTML(
+            station.tags ||
+            "Radio"
+          ) +
+
+          '</small>' +
+
+          '</span>' +
+
+          '<i>▶</i>';
+
+
+        row.onclick =
+          () => {
+
+            playStream(
+              station.name,
+              station.country ||
+              "Live Radio",
+              station.url_resolved ||
+              station.url
+            );
+
+          };
+
+
+        results.appendChild(
+          row
+        );
+
+      }
+    );
+
+  }
+
+  catch (error) {
+
+    console.error(
+      error
+    );
+
+
+    results.innerHTML =
+      '<div class="empty">' +
+      'Could not load radio stations.' +
+      '</div>';
+
+    showToast(
+      "Radio API error"
+    );
+
+  }
+
+}
+
+
+/* ==========================================
+   SEARCH
+========================================== */
+
+function searchECHO() {
+
+  const query =
+    document
+      .getElementById(
+        "searchInput"
+      )
+      .value
+      .trim();
+
+
+  if (!query) {
+
+    showToast(
+      "Type something to search"
+    );
+
+    return;
+
+  }
+
+
+  document
+    .getElementById(
+      "musicSearchInput"
+    )
+    .value =
+    query;
+
+
+  scrollToId(
+    "music-api"
+  );
+
+
+  searchMusic();
+
+}
+
+
+/* ==========================================
+   QUOTES
+========================================== */
+
+const quotes = [
+
+  [
+    "Music expresses that which cannot be put into words.",
+    "Victor Hugo"
+  ],
+
+  [
+    "The only truth is music.",
+    "Jack Kerouac"
+  ],
+
+  [
+    "Without music, life would be a mistake.",
+    "Friedrich Nietzsche"
+  ],
+
+  [
+    "Wisdom begins in wonder.",
+    "Socrates"
+  ],
+
+  [
+    "Every moment is a fresh beginning.",
+    "T.S. Eliot"
+  ]
+
+];
+
+
+function newQuote() {
+
+  const quote =
+    quotes[
+      Math.floor(
+        Math.random() *
+        quotes.length
+      )
+    ];
+
+
+  document.getElementById(
+    "quoteText"
+  ).textContent =
+    "“" +
+    quote[0] +
+    "”";
+
+
+  document.getElementById(
+    "quoteAuthor"
+  ).textContent =
+    "— " +
+    quote[1];
+
+}
+
+
+/* ==========================================
+   DOWNLOAD UI
+========================================== */
+
+function downloadMedia() {
+
+  const url =
+    document
+      .getElementById(
+        "mediaUrl"
+      )
+      .value
+      .trim();
+
+
+  if (!url) {
+
+    showToast(
+      "Paste a permitted media URL first"
+    );
+
+    return;
+
+  }
+
+
+  showToast(
+    "Download backend not connected"
+  );
+
+}
+
+
+/* ==========================================
+   NAVIGATION
+========================================== */
+
+function focusSearch() {
+
+  document
+    .getElementById(
+      "searchInput"
+    )
+    .focus();
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+function goHome() {
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: "smooth"
+
+  });
+
+}
+
+
+function scrollToId(
+  id
+) {
+
+  const element =
+    document.getElementById(
+      id
+    );
+
+
+  if (element) {
+
+    element.scrollIntoView({
+
+      behavior: "smooth"
+
+    });
+
+  }
+
+}
+
+
+/* ==========================================
+   HTML ESCAPE
+========================================== */
+
+function escapeHTML(
+  value
+) {
+
+  return String(value)
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+
+}
+
+
+/* ==========================================
+   START
+========================================== */
+
+initTelegramUser();
+
+loadRadio();
+
+</script>
+
 </body>
 </html>
