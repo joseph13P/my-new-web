@@ -13,6 +13,11 @@
 
 <body>
 
+  <header class="topbar" role="banner">
+    <div class="logo" aria-hidden="true">★</div>
+    <div class="brand">ECHO</div>
+  </header>
+
  <main class="container">
     <section class="hero" aria-labelledby="hero-heading">
       <h1 id="hero-heading">Welcome <span id="userGreeting" aria-live="polite">@Guest</span> 👋</h1>
@@ -155,8 +160,18 @@
   <script src="user.js" defer></script>
 
   <script>
-    // Small inline script: random quotes, trending click handlers and footer year
+    // Small inline script: set logo and app name as constants, random quotes, trending click handlers and footer year
     (function(){
+      // App constants (uppercase)
+      const APP_LOGO = '★';
+      const APP_NAME = 'ECHO';
+
+      // Apply header/logo text (in case server-rendered values differ)
+      const logoEl = document.querySelector('.logo');
+      const brandEl = document.querySelector('.brand');
+      if(logoEl) logoEl.textContent = APP_LOGO;
+      if(brandEl) brandEl.textContent = APP_NAME;
+
       const quotes = [
         {text:'Music expresses that which cannot be put into words.', author:'Victor Hugo'},
         {text:'The only truth is music.', author:'Jack Kerouac'},
