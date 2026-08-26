@@ -3,19 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
+  <title>ECHO — Home</title>
   <link rel="icon" href="favicon.ico" />
-
   <link rel="stylesheet" href="style.css" />
-<header class="topbar" role="banner">
+</head>
+<body>
+  <header class="topbar" role="banner">
     <div class="logo" aria-hidden="true">★</div>
-    <div class="brand" aria-label="Application name">
+    <div class="brand" aria-label="Application name">ECHO</div>
+  </header>
 
- <main class="container">
+  <main class="container">
     <section class="hero" aria-labelledby="hero-heading">
       <h1 id="hero-heading">Welcome <span id="userGreeting" aria-live="polite">@Guest</span> 👋</h1>
-
       <p class="lead">Discover what you want in Telegram</p>
+    </section>
 
     <!-- Movies & Music branch -->
     <section id="movies-music" aria-labelledby="movies-title">
@@ -55,6 +57,10 @@
             <div class="cover" aria-hidden="true">🎵</div>
             <div class="meta">
               <h3>Song One</h3>
+            </div>
+          </button>
+        </li>
+      </ul>
     </section>
 
     <!-- Quotes branch -->
@@ -151,7 +157,8 @@
       // trending items click handler (placeholder behavior)
       document.querySelectorAll('.trend-item').forEach(btn => btn.addEventListener('click', (e)=>{
         const song = btn.dataset.song; const artist = btn.dataset.artist;
-        alert('Play trending: ' + song + ' — ' + artist + '\n(Preview playback not configured)');
+        // replace alert with console message for better UX; keep easily discoverable placeholder
+        console.log('Play trending: ' + song + ' — ' + artist + ' (Preview playback not configured)');
       }));
 
       // footer year
