@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Telegram Login Demo</title>
+    <script async src="https://telegram.org/js/telegram-widget.js?15" data-telegram-login="YOUR_BOT_USERNAME" data-size="large" data-userpic="false" data-auth-url="" data-request-access="write"></script>
+    <style>body{font-family:system-ui,Arial;margin:2rem}</style>
+  </head>
+  <body>
+    <h2>Telegram Login Widget Example</h2>
+    <p>Click the Telegram button to sign in. After Telegram returns the auth payload, paste it into the form below and submit to the server for verification.</p>
+
+    <form id="payloadForm">
+      <label for="payload">Paste Telegram payload (JSON):</label><br />
+      <textarea id="payload" rows="10" cols="80"></textarea><br />
+      <button type="submit">Submit to /api/auth/telegram</button>
+    </form>
+
+    <pre id="result"></pre>
+
+    <script>
+      document.getElementById('payloadForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const raw = document.getElementById('payload').value;
+        let obj;
+        try { obj = JSON.parse(raw); } catch (err) { alert('Invalid JSON'); return; }
+        const res = await fetch('/api/auth/telegram', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(obj)
+        });
+        const text = await res.text();
+        document.getElementById('result').textContent = 'Status: ' + res.status + '\n' + text;
+      });
+    </script>
+  </body>
+</html>
