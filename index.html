@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Music Bot — Discover songs & radio</title>
-  <meta name="description" content="Music Bot — discover songs and radio stations, play and save your favorites." />
+  <title>Echo — Discover songs & radio</title>
+  <meta name="description" content="Echo — discover songs and radio stations, play and save your favorites." />
   <link rel="icon" href="favicon.ico" />
 
   <link rel="stylesheet" href="style.css" />
@@ -15,7 +15,19 @@
 
   <header class="topbar" role="banner">
     <div class="logo" aria-hidden="true">🎵</div>
-    <div class="brand">Music Bot</div>
+    <div class="brand">Echo</div>
+
+    <!-- Main navigation -->
+    <nav class="main-nav" role="navigation" aria-label="Primary">
+      <ul>
+        <li><a href="#movies-music">Movies &amp; Music</a></li>
+        <li><a href="#quotes">Quotes &amp; Jokes &amp; Wisdom</a></li>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#admin-rights">Admins Rights &amp; Privacy Policy</a></li>
+        <li><a href="#support">Admin Support &amp; Contact &amp; Suggestions</a></li>
+      </ul>
+    </nav>
+
     <button class="menu-btn" type="button" aria-label="Open menu">☰</button>
   </header>
 
@@ -25,17 +37,19 @@
       <p class="lead">Discover music and radio stations.</p>
 
       <form id="searchForm" class="search-box" role="search">
-        <label for="searchInput" class="sr-only">Search music</label>
+        <label for="searchInput" class="sr-only">Search</label>
         <span aria-hidden="true">🔎</span>
-        <input id="searchInput" name="q" type="search" placeholder="Search music..." />
+        <input id="searchInput" name="q" type="search" placeholder="Search content..." />
         <button id="searchButton" type="submit">Search</button>
       </form>
     </section>
 
-    <section aria-labelledby="popular-title">
+    <section id="movies-music" aria-labelledby="movies-title">
       <div class="section-title">
-        <h2 id="popular-title">🔥 Popular</h2>
+        <h2 id="movies-title">1. Movies &amp; Music</h2>
       </div>
+
+      <p class="muted">Curated movies, soundtracks, and popular music.</p>
 
       <ul class="music-grid" role="list">
         <li>
@@ -73,39 +87,39 @@
       </ul>
     </section>
 
-    <section aria-labelledby="radio-title">
+    <section id="quotes" aria-labelledby="quotes-title">
       <div class="section-title">
-        <h2 id="radio-title">📻 Radio Stations</h2>
+        <h2 id="quotes-title">2. Quotes &amp; Jokes &amp; Wisdom</h2>
       </div>
+      <div class="cards" style="padding:0 1rem;">
+        <article class="card">
+          <p class="lead">"Music expresses that which cannot be put into words." — Victor Hugo</p>
+        </article>
+        <article class="card">
+          <p class="lead">"Why did the musician get arrested? Because he got caught with too many sharp objects."</p>
+        </article>
+      </div>
+    </section>
 
-      <ul class="radio-list" role="list">
-        <li class="radio-card">
-          <div class="station-icon" aria-hidden="true">🔴</div>
-          <div class="station-info">
-            <h3>Chill Radio</h3>
-            <p>Relaxing music</p>
-          </div>
-          <button class="radio-play" type="button" data-station="Chill Radio">▶</button>
-        </li>
+    <section id="tools" aria-labelledby="tools-title">
+      <div class="section-title">
+        <h2 id="tools-title">3. Tools</h2>
+      </div>
+      <p class="muted">Handy utilities: tuner, BPM counter, playlist generator (coming soon).</p>
+    </section>
 
-        <li class="radio-card">
-          <div class="station-icon" aria-hidden="true">🟢</div>
-          <div class="station-info">
-            <h3>Pop Radio</h3>
-            <p>Popular hits</p>
-          </div>
-          <button class="radio-play" type="button" data-station="Pop Radio">▶</button>
-        </li>
+    <section id="admin-rights" aria-labelledby="admin-title">
+      <div class="section-title">
+        <h2 id="admin-title">4. Admins Rights &amp; Privacy Policy</h2>
+      </div>
+      <p class="muted">Policies and access control for administrators; privacy details.</p>
+    </section>
 
-        <li class="radio-card">
-          <div class="station-icon" aria-hidden="true">🔵</div>
-          <div class="station-info">
-            <h3>Lo-Fi Radio</h3>
-            <p>Study &amp; chill</p>
-          </div>
-          <button class="radio-play" type="button" data-station="Lo-Fi Radio">▶</button>
-        </li>
-      </ul>
+    <section id="support" aria-labelledby="support-title">
+      <div class="section-title">
+        <h2 id="support-title">5. Admin Support &amp; Contact &amp; Suggestions</h2>
+      </div>
+      <p class="muted">Contact form and suggestions for improving Echo.</p>
     </section>
   </main>
 
@@ -116,7 +130,7 @@
       <div id="playerCover">🎵</div>
       <div>
         <strong id="playerTitle">Nothing playing</strong>
-        <small id="playerArtist">Music Bot</small>
+        <small id="playerArtist">Echo</small>
       </div>
     </div>
 
